@@ -1,0 +1,257 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+android:layout_height="match_parent" tools:context=".Farkle"
+android:orientation="horizontal"
+android:background="#000000"
+    android:id="@+id/top_gui_layout">
+
+<ImageView
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:id="@+id/farkleTextImageView1"
+    android:scaleType="fitCenter"
+    android:src="@drawable/farkle_title"
+    android:layout_weight="1" />
+
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="552dp"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/playerOneImage"
+                android:layout_weight="1.5"
+                android:src="@drawable/avatar_girl" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Player 1"
+                android:id="@+id/playerOneText"
+                android:layout_weight=".5"
+                android:gravity="center"
+                android:textColor="#ffffff" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="187dp"
+            android:layout_height="220dp"
+            android:gravity="bottom|center">
+
+            <Space
+                android:layout_width="20px"
+                android:layout_height="20px" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Roll Dice"
+                android:id="@+id/rollDiceButton"
+                android:gravity="center"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bank Points"
+                android:id="@+id/bankPointsButton"
+                android:gravity="center"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/playerTwoImage"
+                android:layout_weight="1.5"
+                android:src="@drawable/avatar_puppy" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Player 2"
+                android:id="@+id/playerTwoText"
+                android:layout_weight=".5"
+                android:gravity="center"
+                android:textColor="#ffffff" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.5">
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="100"
+            android:id="@+id/p0CurrentScore"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:textSize="35sp"
+            android:background="#00000000" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="750"
+            android:id="@+id/bankScore"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:textSize="35sp"
+            android:background="#ff626260" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="6000"
+            android:id="@+id/p1CurrentScore"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:textSize="35sp"
+            android:background="#00000000" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageButton
+                android:layout_width="202dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/dieOne"
+                android:src="@drawable/red_five_die"
+                android:background="#00000000"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:longClickable="true" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="0" />
+
+            <ImageButton
+                android:layout_width="202dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/dieTwo"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:background="#00000000"
+                android:src="@drawable/red_four_die" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageButton
+                android:layout_width="202dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/dieThree"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:src="@drawable/red_one_die"
+                android:background="#00000000" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="0" />
+
+            <ImageButton
+                android:layout_width="202dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/dieFour"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:src="@drawable/red_five_die"
+                android:background="#00000000" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageButton
+                android:layout_width="202dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/dieFive"
+                android:scaleType="fitCenter"
+                android:layout_weight="1"
+                android:src="@drawable/red_three_die"
+                android:background="#00000000"
+                android:clickable="false"
+                android:longClickable="false" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="0" />
+
+            <ImageButton
+                android:layout_width="202dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/dieSix"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:background="#00000000"
+                android:src="@drawable/red_six_die"
+                android:contentDescription="dieSix" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
+
+<ImageView
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:id="@+id/farkleTextImageView2"
+    android:scaleType="fitCenter"
+    android:layout_gravity="bottom"
+    android:layout_weight="1"
+    android:src="@drawable/farkle_title" />
+
+</LinearLayout>

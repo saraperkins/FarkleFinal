@@ -1,0 +1,98 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+        xmlns:android="http://schemas.android.com/apk/res/android">
+        <item
+    android:id="@+id/score_guide"
+    android:title="Score Guide"
+    android:orderInCategory="100" />
+        <item
+
+    android:id="@+id/change_picture"
+    android:title="Change Left Picture"
+    android:orderInCategory="200">
+            <menu>
+                <item
+    android:id="@+id/girl"
+    android:orderInCategory="210"
+    android:title="Girl Blonde Hair" />
+                <item
+    android:id="@+id/girl3"
+    android:orderInCategory="220"
+    android:title="Girl Brown Hair" />
+                <item
+    android:id="@+id/boyBlackHair"
+    android:orderInCategory="230"
+    android:title="Boy Black Hair" />
+                <item
+    android:id="@+id/boyRedHair"
+    android:orderInCategory="240"
+    android:title="Boy Red Hair" />
+                <item
+    android:id="@+id/dog"
+    android:orderInCategory="250"
+    android:title="Dog" />
+                <item
+    android:id="@+id/cat2"
+    android:orderInCategory="260"
+    android:title="Creepy Cat" />
+            </menu>
+        </item>
+        <item
+    android:id="@+id/change_other_picture"
+    android:title="Change Right Picture"
+    android:orderInCategory="300">
+            <menu>
+                <item
+    android:id="@+id/girl1"
+    android:orderInCategory="310"
+    android:title="Girl Blonde Hair" />
+                <item
+    android:id="@+id/girl2"
+    android:orderInCategory="350"
+    android:title="Girl Brown Hair" />
+                <item
+    android:id="@+id/boyBlackHair1"
+    android:orderInCategory="320"
+    android:title="Boy Black Hair" />
+                <item
+    android:id="@+id/boyRedHair1"
+    android:orderInCategory="330"
+    android:title="Boy Red Hair" />
+    <item
+        android:id="@+id/dog1"
+        android:orderInCategory="340"
+        android:title="Dog" />
+    <item
+        android:id="@+id/cat"
+        android:orderInCategory="360"
+        android:title="Creepy Cat" />
+            </menu>
+        </item>
+    <item
+    android:id="@+id/menu_settings"
+    android:title="Dice Style"
+    android:orderInCategory="400">
+<menu>
+                    <item
+        android:id="@+id/pinkDie"
+        android:orderInCategory="410"
+        android:title="Pink Dice" />
+                    <item
+        android:id="@+id/sunsetDie"
+        android:orderInCategory="420"
+        android:title="Sunset Dice" />
+                    <item
+    android:id="@+id/purpleDie"
+    android:orderInCategory="430"
+    android:title="Purple Dice" />
+    <item
+        android:id="@+id/redDie"
+        android:orderInCategory="430"
+        android:title="Red Dice" />
+            <item
+    android:id="@+id/nuxDie"
+    android:orderInCategory="440"
+    android:title="Secret Dice" />       
+    </menu>
+    </item>
+</menu>
+
