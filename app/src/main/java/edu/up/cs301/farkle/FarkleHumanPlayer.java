@@ -1,5 +1,6 @@
 package edu.up.cs301.farkle;
 
+import android.app.ActionBar;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
@@ -143,9 +144,6 @@ public class FarkleHumanPlayer extends GameHumanPlayer implements View.OnClickLi
             getTimer().setInterval(1500);
             getTimer().start();
 
-//            if (myState.getCurrentPlayer() == playerNum) {
-//                game.sendAction(new FarkleAction(this));
-//            }
         }
     }
     
@@ -164,6 +162,18 @@ public class FarkleHumanPlayer extends GameHumanPlayer implements View.OnClickLi
         if ( activity instanceof FarkleMainActivity) {
             ((FarkleMainActivity)activity).setGuiPlayer(this);
         }
+
+
+        /**
+         * External Citation:
+         * Date: 	 22 April 2016
+         * Problem:  hiding the action bar before the game starts
+         * Resource: http://developer.android.com/training/system-ui/status.html
+         * Solution: hide, then show
+         */
+
+        ActionBar actionBar = activity.getActionBar();
+        actionBar.show();
         
         // text views
         p0scoreText = (TextView)activity.findViewById(R.id.p0CurrentScore);
@@ -305,7 +315,7 @@ public class FarkleHumanPlayer extends GameHumanPlayer implements View.OnClickLi
          * Date: 	 12 April 2016
          * Problem:  making the farkle signal show
          * Resource: Nux
-         * Solution: Use use a timer and invalidate the views
+         * Solution: Use use a timer and invalidate the views, also use flag
          */
         farkleImage1.setVisibility(View.INVISIBLE);
         farkleImage2.setVisibility(View.INVISIBLE);

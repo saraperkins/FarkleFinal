@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="P:\FarkleBeta\app\src\main\jniLibs"/></dataSet><dataSet config="debug"><source path="P:\FarkleBeta\app\src\debug\jniLibs"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/Users/Sara/Desktop/github_farkle_final/FarkleFinal/app/src/main/jniLibs"/></dataSet><dataSet config="debug"><source path="/Users/Sara/Desktop/github_farkle_final/FarkleFinal/app/src/debug/jniLibs"/></dataSet></merger>

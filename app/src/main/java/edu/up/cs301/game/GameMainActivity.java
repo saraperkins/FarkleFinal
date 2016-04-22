@@ -2,6 +2,7 @@ package edu.up.cs301.game;
 
 import java.util.ArrayList;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -172,6 +173,10 @@ View.OnClickListener {
 				MessageBox.popUpMessage(msg, this);
 			}
 		}
+
+
+		ActionBar actionBar = getActionBar();
+		actionBar.hide();
 
 	}// onCreate
 
