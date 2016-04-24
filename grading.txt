@@ -1,0 +1,22 @@
+Functionality that deserves extra points: 
+- Ability to change dice style
+- Ability to change avatar image
+- Can play in either portrait or landscape orientation (however if you change orientation mid-game you have to press roll dice again to update the display). 
+- Smart AI is effective and particularly challenging
+- Game is visually pleasing
+- GUI is effective and easy to use
+- Screen flashes in a Local player vs AI/network player if the local player attempts to tap a button (roll or bank) during the opponent’s turn. 
+- Amazing customized  icon 
+
+Known Bugs: 
+- The majority of the bugs that we decided not to fix were enhancements. 
+- One bug that was unable to be resolved was a report of being able to bank with two 1’s and a single 6. We added tests and have replicated the reported problem and have not been able to identify the source of the bug. When we replicated the problem it did not let us bank (which is the correct behavior). 
+
+Notes on how to play that might be helpful: 
+- Must click “Roll Dice” at the beginning of every turn. 
+- If you have all dice used or selected, you will be given all six new dice on the next roll (there is a 2% chance of getting a Farkle with 6 dice).
+- Clicking bank points will end your turn and add the current running total (in the grey box) to your current score. 
+- If no valid dice combinations are present in your roll, you have Farkled and you will lose the running total and your turn is over. “Farkle” will flash on either side of the screen.
+- If you are unsure of the valid scoring combinations, click the menu in the upper-right hand corner and select “score guide”. A toast will appear briefly with the scoring combinations and their values. 
+- To change each avatar image or the style of dice, also click the menu in the upper-right hand corner. 
+ 

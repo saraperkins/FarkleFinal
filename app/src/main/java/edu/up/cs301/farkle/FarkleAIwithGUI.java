@@ -1,27 +1,20 @@
 package edu.up.cs301.farkle;
 
-import android.app.ActionBar;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
-import edu.up.cs301.game.Game;
 import edu.up.cs301.game.GameHumanPlayer;
 import edu.up.cs301.game.GameMainActivity;
 import edu.up.cs301.game.actionMsg.GameAction;
 import edu.up.cs301.game.infoMsg.GameInfo;
 import edu.up.cs301.game.R;
-import edu.up.cs301.game.infoMsg.IllegalMoveInfo;
-import edu.up.cs301.game.infoMsg.NotYourTurnInfo;
 
 /**
  * represents a human player in the game, allowing the person to interact with the
@@ -50,14 +43,7 @@ public class FarkleAIwithGUI extends GameHumanPlayer {
     private String[] diceSelections = new String[64];
     private ArrayList<GameAction> myCurActionList;
     private boolean diceChosen;
-
-    //images
-    //    protected int[] picId = {R.drawable.avatar_girl, R.drawable.avatar_boy1,R.drawable.avatar_boy2,
-    //                             R.drawable.avatar_puppy};
-
     private int diceStyle = 0;
-    // 0 = red; 1 = pink; 2 = sunset; 3 = purple; 4 = nux
-
     private int lastFarkleId = -1;
 
     // image res id's
@@ -76,10 +62,8 @@ public class FarkleAIwithGUI extends GameHumanPlayer {
     // game play variables
     private GameMainActivity myActivity;
 
-    private boolean flashFarkle;
     /**
-     * constructor for a human player
-     *
+     * constructor for the smart ai with gui
      *
      * @param name name of the player
      */
@@ -185,6 +169,8 @@ public class FarkleAIwithGUI extends GameHumanPlayer {
                     diceChosen = true;
                 }
             }
+
+            // send actions from the queue
             if(myCurActionList.size() > 0) {
                 GameAction curAction = myCurActionList.get(0);
                 myCurActionList.remove(0);
@@ -222,10 +208,6 @@ public class FarkleAIwithGUI extends GameHumanPlayer {
         myActivity = activity;
         activity.setContentView(R.layout.farkle_human_player);
 
-        if ( activity instanceof FarkleMainActivity) {
-            ((FarkleMainActivity)activity).setGuiPlayer(this);
-        }
-
         // text views
         p0scoreText = (TextView)activity.findViewById(R.id.p0CurrentScore);
         p1scoreText = (TextView)activity.findViewById(R.id.p1CurrentScore);
@@ -241,6 +223,8 @@ public class FarkleAIwithGUI extends GameHumanPlayer {
 
         playerOneImage.setImageResource(R.drawable.avatar_girl);
         playerTwoImage.setImageResource(R.drawable.avatar_puppy);
+        farkleImage1.setVisibility(View.INVISIBLE);
+        farkleImage2.setVisibility(View.INVISIBLE);
 
         // buttons
         rollDiceButton = (Button)activity.findViewById(R.id.rollDiceButton);
@@ -253,10 +237,6 @@ public class FarkleAIwithGUI extends GameHumanPlayer {
         ImageButton dieSix = (ImageButton)activity.findViewById(R.id.dieSix);
         diceButtons[0] = dieOne;  diceButtons[1] = dieTwo;  diceButtons[2] = dieThree;
         diceButtons[3] = dieFour; diceButtons[4] = dieFive; diceButtons[5] = dieSix;
-
-
-        farkleImage1.setVisibility(View.INVISIBLE);
-        farkleImage2.setVisibility(View.INVISIBLE);
     }
 
 
@@ -275,6 +255,7 @@ public class FarkleAIwithGUI extends GameHumanPlayer {
                     diceButtons[i].setImageResource(diceWhiteResID[curDie.getValue()-1]);
                 }
                 else {
+                    // custom dice for player, black for opponent
                     if (state.getCurrentPlayer() == playerNum) {
                         diceButtons[i].setImageResource(diceResID[diceStyle][curDie.getValue() - 1]);
                     } else {
@@ -376,6 +357,7 @@ public class FarkleAIwithGUI extends GameHumanPlayer {
                 }
             }
 
+            // save the highest scoring selection
             if (state.getRunningTotal() > highestScore) {
                 highestScore = state.getRunningTotal();
                 highestCombo = currSel;

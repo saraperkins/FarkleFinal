@@ -41,14 +41,8 @@ public class FarkleHumanPlayer extends GameHumanPlayer implements View.OnClickLi
     // buttons
     protected Button rollDiceButton, bankPointsButton;
     protected ImageButton[] diceButtons = new ImageButton[6];
-    
-    //images
-    //    protected int[] picId = {R.drawable.avatar_girl, R.drawable.avatar_boy1,R.drawable.avatar_boy2,
-    //                             R.drawable.avatar_puppy};
 
     private int diceStyle = 0;
-    // 0 = red; 1 = pink; 2 = sunset; 3 = purple; 4 = nux
-
     private int lastFarkleId = -1;
 
     // image res id's
@@ -78,7 +72,6 @@ public class FarkleHumanPlayer extends GameHumanPlayer implements View.OnClickLi
     private GameMainActivity myActivity;
     private FarkleState myState;
 
-    private boolean flashFarkle;
     /**
      * constructor for a human player
      *
@@ -115,7 +108,6 @@ public class FarkleHumanPlayer extends GameHumanPlayer implements View.OnClickLi
 
         // ignore the message if it's not a FarkleState message
         if (!(info instanceof FarkleState)) {
-            //if (info instanceof IllegalMoveInfo || info instanceof NotYourTurnInfo) {
             if (info instanceof NotYourTurnInfo) {
                 this.flash(0xff49a17f, 100);
 
@@ -190,6 +182,8 @@ public class FarkleHumanPlayer extends GameHumanPlayer implements View.OnClickLi
         
         playerOneImage.setImageResource(R.drawable.avatar_girl);
         playerTwoImage.setImageResource(R.drawable.avatar_puppy);
+        farkleImage1.setVisibility(View.INVISIBLE);
+        farkleImage2.setVisibility(View.INVISIBLE);
         
         // buttons
         rollDiceButton = (Button)activity.findViewById(R.id.rollDiceButton);
@@ -207,10 +201,6 @@ public class FarkleHumanPlayer extends GameHumanPlayer implements View.OnClickLi
         for(ImageButton ib : diceButtons) { ib.setOnClickListener(this); }
         rollDiceButton.setOnClickListener(this);
         bankPointsButton.setOnClickListener(this);
-
-        farkleImage1.setVisibility(View.INVISIBLE);
-        farkleImage2.setVisibility(View.INVISIBLE);
-        
     }
     
     /**
@@ -261,6 +251,7 @@ public class FarkleHumanPlayer extends GameHumanPlayer implements View.OnClickLi
                     diceButtons[i].setImageResource(diceWhiteResID[curDie.getValue()-1]);
                 }
                 else {
+                    // custom for the player, black for the opponent
                     if (myState.getCurrentPlayer() == playerNum) {
                         diceButtons[i].setImageResource(diceResID[diceStyle][curDie.getValue() - 1]);
                     } else {

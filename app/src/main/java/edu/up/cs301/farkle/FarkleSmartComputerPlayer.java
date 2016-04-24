@@ -80,6 +80,7 @@ public class FarkleSmartComputerPlayer extends GameComputerPlayer implements Far
                 return;
             }
 
+            // clear the action list if it is not my turn
             if (((FarkleState) info).getCurrentPlayer() != this.playerNum) {
                 myCurActionList.clear();
                 highestScore = 0;
@@ -111,7 +112,6 @@ public class FarkleSmartComputerPlayer extends GameComputerPlayer implements Far
                     myCurActionList.add(new RollAction(this));
                 } else {
                     chooseDice();
-                    Log.i("my dice", highestCombo);
                     for (int i = 0; i < 6; i++) {
                         if (highestCombo.charAt(i) == '1') {
                             myCurActionList.add(new SelectDieAction(this, i));
@@ -122,6 +122,8 @@ public class FarkleSmartComputerPlayer extends GameComputerPlayer implements Far
                     diceChosen = true;
                 }
             }
+
+            // send actions to the game
             if(myCurActionList.size() > 0) {
                 GameAction curAction = myCurActionList.get(0);
                 myCurActionList.remove(0);
@@ -130,14 +132,11 @@ public class FarkleSmartComputerPlayer extends GameComputerPlayer implements Far
                     sleepTime = 300;
                     diceChosen = false;
                     myCurActionList.clear();
-                    Log.i("computer", "rolling");
                 }  else if (curAction instanceof SelectDieAction) {
                     sleepTime = 300;
-                    //Log.i(""+((SelectDieAction)(curAction)).getIdxOfDie(), "selected");
                 } else if (curAction instanceof BankPointsAction) {
                     sleepTime = 800;
                     diceChosen = false;
-                    Log.i("banking", "points");
                 }
                 try {
                     Thread.sleep(sleepTime);
@@ -155,7 +154,6 @@ public class FarkleSmartComputerPlayer extends GameComputerPlayer implements Far
      * @return true if new combo is picked
      */
     public boolean chooseDice() {
-        Log.i("choosing", "dice");
         for (String currSel : diceSelections) {
             for (int i = 0; i < 6; i++) {
                 if (currSel.charAt(i) == '0') {

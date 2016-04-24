@@ -114,14 +114,13 @@ public class FarkleState extends GameState {
 	 * @return true if the roll was successful
 	 */
 	public boolean rollDice() {
-		/*****************/
 		boolean diceInPlay = false;
 		for (Die d : dice) {
 			if (d.isInPlay()) {
 				diceInPlay = true;
 			}
 		}
-		if (diceInPlay && hasFarkle()) { /****************/
+		if (diceInPlay && hasFarkle()) {
 			farkle();
 		}
 		// all die are out of play -- means curPlayer can roll bc player has just changed
@@ -193,8 +192,8 @@ public class FarkleState extends GameState {
 		// recalculate point options, set running total to add selected points
 		runningTotal = preselectRunningTotal;
 		updateCount(false);
-		int[] countBackup = new int[6];
-		cpy6intarray(count, countBackup);
+		//int[] countBackup = new int[6];
+		//cpy6intarray(count, countBackup);
 
 		if (sixOfAKind(false)) { // 3000 six of a kind
 			runningTotal += FarkleScorer.SIX_OFAKIND; return; // six die
@@ -204,9 +203,10 @@ public class FarkleState extends GameState {
 		}
 		if (fiveOfAKind(false)) { // 2000 five of a kind
 			runningTotal += FarkleScorer.FIVE_OFAKIND;
-			for (int i = 0; i < 6; i++) { if (count[i] == 5) { count[i] = 0; } }
-			cpy6intarray(count, countBackup);
-		} else { cpy6intarray(countBackup, count); }
+			for (int i = 0; i < 6; i++) {
+				if (count[i] == 5) { count[i] = 0; }
+			}
+		}
 		if (fourAndPair(false)) { // 1500 four of a number and a pair
 			runningTotal += FarkleScorer.FULL_HOUSE; return; // six die
 		}
@@ -218,53 +218,46 @@ public class FarkleState extends GameState {
 		}
 		if (fourOfAKind(false)) { // 1000 four of a kind
 			runningTotal += FarkleScorer.FOUR_OFAKIND;
-			for (int i = 0; i < 6; i++) { if (count[i] == 4) { count[i] = 0; } }
-			cpy6intarray(count, countBackup);
-		} else { cpy6intarray(countBackup, count);}
+			for (int i = 0; i < 6; i++) {
+				if (count[i] == 4) { count[i] = 0; }
+			}
+		}
 		if (threeOfAKind(false) == 6) { // 600 triple six
 			runningTotal += FarkleScorer.tripleScore(6);
-			count[6-1] = 0;
-			cpy6intarray(count, countBackup);
-		} else { cpy6intarray(countBackup, count); }
+			count[6 - 1] = 0;
+		}
 		if (threeOfAKind(false) == 5) { // 500 triple five
 			runningTotal += FarkleScorer.tripleScore(5);
-			count[5-1] = 0;
-			cpy6intarray(count, countBackup);
-		} else { cpy6intarray(countBackup, count); }
+			count[5 - 1] = 0;
+		}
 		if (threeOfAKind(false) == 4) { // 400 triple four
 			runningTotal += FarkleScorer.tripleScore(4);
-			count[4-1] = 0;
-			cpy6intarray(count, countBackup);
-		} else { cpy6intarray(countBackup, count); }
+			count[4 - 1] = 0;
+		}
 		if (threeOfAKind(false) == 3) { // 300 triple three
 			runningTotal += FarkleScorer.tripleScore(3);
 			count[3-1] = 0;
-			cpy6intarray(count, countBackup);
-		} else { cpy6intarray(countBackup, count); }
+		}
 		if (threeOfAKind(false) == 2) { // 200 triple two
 			runningTotal += FarkleScorer.tripleScore(2);
 			count[2-1] = 0;
-			cpy6intarray(count, countBackup);
-		} else { cpy6intarray(countBackup, count); }
+		}
 		if (threeOfAKind(false) == 1) { // 300 triple one
 			runningTotal += FarkleScorer.tripleScore(1);
 			count[1-1] = 0;
-			cpy6intarray(count, countBackup);
-		} else { cpy6intarray(countBackup, count); }
+		}
 		// 100 single one
 		int numOnes = numSingles(1, false);
 		if (numOnes > 0) {
 			runningTotal += numOnes * FarkleScorer.SINGLE_1;
 		    count[1-1] = 0;
-			cpy6intarray(count, countBackup);
-		} else { cpy6intarray(countBackup, count); }
+		}
 		// 50 single five
 		int numFives = numSingles(5, false);
 		if (numFives > 0) {
 			runningTotal += numFives * FarkleScorer.SINGLE_5;
 			count[5-1] = 0;
-			cpy6intarray(count, countBackup);
-		} else { cpy6intarray(countBackup, count); }
+		}
 
 		// check for invalid selection -- set runningTotal to preSelectRunningTotal
 		boolean dieLeftOver = false;
@@ -288,7 +281,6 @@ public class FarkleState extends GameState {
 			}
 		}
 		if (diceInPlay && hasFarkle()) {
-			Log.i("i am here", "me");
 			farkle();
 		}
 		// determine if player is not allowed to bank points
@@ -300,7 +292,7 @@ public class FarkleState extends GameState {
 		// add the running total to the score of the current player
 		playerScores[currentPlayer] += runningTotal;
 
-				// switch players and reset
+		// switch players and reset
 		farkle(); // not really a farkle, but use for reset functionality
 
 		return true;

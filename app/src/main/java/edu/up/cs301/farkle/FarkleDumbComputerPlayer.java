@@ -24,7 +24,6 @@ public class FarkleDumbComputerPlayer extends GameComputerPlayer implements Fark
     private FarkleState state;
     private String validCombo; // score-able dice combo -- binary string
     private int validScore;
-    private boolean diceChosen;
     
     // additions
     private String[] diceSelections = new String[64];
@@ -76,11 +75,11 @@ public class FarkleDumbComputerPlayer extends GameComputerPlayer implements Fark
                 return;
             }
 
+            // clear up the queue if it's not my turn
             if (((FarkleState) info).getCurrentPlayer() != this.playerNum) {
                 myCurActionList.clear();
                 validScore = 0;
                 validCombo = null;
-                diceChosen = false;
                 return;
             }
 
@@ -96,7 +95,6 @@ public class FarkleDumbComputerPlayer extends GameComputerPlayer implements Fark
                     myCurActionList.add(new RollAction(this));
                 } else {
                     chooseDice();
-                    Log.i("my dice", validCombo);
                     for (int i = 0; i < 6; i++) {
                         if (validCombo.charAt(i) == '1') {
                             myCurActionList.add(new SelectDieAction(this, i));
@@ -104,23 +102,21 @@ public class FarkleDumbComputerPlayer extends GameComputerPlayer implements Fark
                     }
                     validCombo = null;
                     validScore = 0;
-                    diceChosen = false;
                     myCurActionList.add(new BankPointsAction(this));
                 }
             }
+
+            // send actions from the queue
             if(myCurActionList.size() > 0) {
                 GameAction curAction = myCurActionList.get(0);
                 myCurActionList.remove(0);
                 int sleepTime = 0;
                 if (curAction instanceof RollAction) {
                     sleepTime = 600;
-                    Log.i("computer", "rolling");
                 }  else if (curAction instanceof SelectDieAction) {
                     sleepTime = 500;
-                    Log.i(""+((SelectDieAction)(curAction)).getIdxOfDie(), "selected");
                 } else if (curAction instanceof BankPointsAction) {
                     sleepTime = 1200;
-                    Log.i("banking", "points");
                 }
                 try {
                     Thread.sleep(sleepTime);
@@ -138,7 +134,6 @@ public class FarkleDumbComputerPlayer extends GameComputerPlayer implements Fark
      * @return true if new combo is picked
      */
     public boolean chooseDice() {
-        Log.i("choosing", "dice");
         for (String currSel : diceSelections) {
             for (int i = 0; i < 6; i++) {
                 if (currSel.charAt(i) == '0') {
@@ -157,18 +152,10 @@ public class FarkleDumbComputerPlayer extends GameComputerPlayer implements Fark
             if (state.getRunningTotal() > validScore) {
                 validScore = state.getRunningTotal();
                 validCombo = currSel;
-                diceChosen = true;
-                Log.i("dice", "chosen");
                 return true;
             }
         }
         return true;
     }
-    
-    /**
-     * callback method: the timer ticked
-     */
-    protected void timerTicked() {
-        
-    }
+
 }

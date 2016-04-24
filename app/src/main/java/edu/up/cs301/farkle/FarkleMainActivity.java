@@ -31,22 +31,13 @@ public class FarkleMainActivity extends GameMainActivity {
     // for networked play
     private static final int PORT_NUMBER = 2234;
     protected static ImageView playerOneImage, playerTwoImage;
-    private GameHumanPlayer guiPlayer;
+    private FarkleHumanPlayer guiPlayer;
 
 
-    /*
     public void setGuiPlayer(FarkleHumanPlayer p) {
         guiPlayer = p;
     }
-    public void setGuiPlayer(FarkleAIwithGUI p) {
-        guiPlayer = p;
-    }*/
 
-    public void setGuiPlayer(GameHumanPlayer p) {
-        guiPlayer = p;
-    }
-
-    //or I can do references of some kind in GameState
 
     /**
      * Create the default configuration for this game:
@@ -63,19 +54,19 @@ public class FarkleMainActivity extends GameMainActivity {
         ArrayList<GamePlayerType> playerTypes = new ArrayList<GamePlayerType>();
 
         // Farkle has two player types:  human and computer
-        playerTypes.add(new GamePlayerType("Local Human Player") {
+        playerTypes.add(new GamePlayerType("You") {
             public GamePlayer createPlayer(String name) {
                 return new FarkleHumanPlayer(name);
             }});
-        playerTypes.add(new GamePlayerType("Computer Player") {
+        playerTypes.add(new GamePlayerType("Dumb Computer Player") {
             public GamePlayer createPlayer(String name) {
                 return new FarkleDumbComputerPlayer(name);
             }});
-        playerTypes.add(new GamePlayerType("Hard Computer Player") {
+        playerTypes.add(new GamePlayerType("Smart Computer Player") {
             public GamePlayer createPlayer(String name) {
                 return new FarkleSmartComputerPlayer(name);
             }});
-        playerTypes.add(new GamePlayerType("AI with GUI") {
+        playerTypes.add(new GamePlayerType("Smart AI with GUI") {
             public GamePlayer createPlayer(String name) {
                 return new FarkleAIwithGUI(name);
             }});
@@ -84,9 +75,8 @@ public class FarkleMainActivity extends GameMainActivity {
         // Create a game configuration class for Farkle:
         GameConfig defaultConfig = new GameConfig(playerTypes, 2, 2, "Farkle", PORT_NUMBER);
         defaultConfig.addPlayer("Human", 0); // player 1: a human player
-        defaultConfig.addPlayer("Computer Smart", 2); // player 2: a computer player
-        defaultConfig.setRemoteData("Remote Human Player", "", 0);
-
+        defaultConfig.addPlayer("Hal", 2); // player 2: a computer player
+        defaultConfig.setRemoteData("Remote Player", "", 0);
 
         return defaultConfig;
     }
@@ -112,6 +102,7 @@ public class FarkleMainActivity extends GameMainActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        // score guide toast
         if (id == R.id.score_guide) {
             Toast score_guide = Toast.makeText(getApplicationContext(), "5’s = 50 points\n" +
                     "1’s = 100 points\n" +
@@ -133,7 +124,7 @@ public class FarkleMainActivity extends GameMainActivity {
             score_guide.show();
         }
 
-        //noinspection SimplifiableIfStatement
+        //update pictures and dice
         else if (id == R.id.girl) {
             playerOneImage.setImageResource(R.drawable.avatar_girl);
         } else if (id == R.id.boyBlackHair) {
@@ -159,59 +150,35 @@ public class FarkleMainActivity extends GameMainActivity {
         } else if (id == R.id.girl3) {
             playerOneImage.setImageResource(R.drawable.avatar_girl2);
         }
-        if (guiPlayer instanceof FarkleHumanPlayer) {
-            if (id == R.id.pinkDie) {
-                if (guiPlayer != null) {
-                    ((FarkleHumanPlayer)guiPlayer).setDiceStyle(1);
-                }
-            } else if (id == R.id.sunsetDie) {
-                if (guiPlayer != null) {
-                    ((FarkleHumanPlayer)guiPlayer).setDiceStyle(2);
-                }
-            } else if (id == R.id.purpleDie) {
-                if (guiPlayer != null) {
-                    ((FarkleHumanPlayer)guiPlayer).setDiceStyle(3);
-                }
-            } else if (id == R.id.redDie) {
-                if (guiPlayer != null) {
-                    ((FarkleHumanPlayer)guiPlayer).setDiceStyle(0);
-                }
-            } else if (id == R.id.nuxDie) {
-                double x = Math.random();
-                if (guiPlayer != null) {
-                    if (x > 0.5)
-                        ((FarkleHumanPlayer)guiPlayer).setDiceStyle(4);
-                    else
-                        ((FarkleHumanPlayer)guiPlayer).setDiceStyle(5);
-                }
+
+        // update the dice style
+        if (id == R.id.pinkDie) {
+            if (guiPlayer != null) {
+                guiPlayer.setDiceStyle(1);
             }
-        } else if (guiPlayer instanceof FarkleAIwithGUI) {
-            if (id == R.id.pinkDie) {
-                if (guiPlayer != null) {
-                    ((FarkleAIwithGUI)guiPlayer).setDiceStyle(1);
-                }
-            } else if (id == R.id.sunsetDie) {
-                if (guiPlayer != null) {
-                    ((FarkleAIwithGUI)guiPlayer).setDiceStyle(2);
-                }
-            } else if (id == R.id.purpleDie) {
-                if (guiPlayer != null) {
-                    ((FarkleAIwithGUI)guiPlayer).setDiceStyle(3);
-                }
-            } else if (id == R.id.redDie) {
-                if (guiPlayer != null) {
-                    ((FarkleAIwithGUI)guiPlayer).setDiceStyle(0);
-                }
-            } else if (id == R.id.nuxDie) {
-                double x = Math.random();
-                if (guiPlayer != null) {
-                    if (x > 0.5)
-                        ((FarkleHumanPlayer)guiPlayer).setDiceStyle(4);
-                    else
-                        ((FarkleHumanPlayer)guiPlayer).setDiceStyle(5);
-                }
+        } else if (id == R.id.sunsetDie) {
+            if (guiPlayer != null) {
+                guiPlayer.setDiceStyle(2);
+            }
+        } else if (id == R.id.purpleDie) {
+            if (guiPlayer != null) {
+                guiPlayer.setDiceStyle(3);
+            }
+        } else if (id == R.id.redDie) {
+            if (guiPlayer != null) {
+                guiPlayer.setDiceStyle(0);
+            }
+        } else if (id == R.id.nuxDie) {
+            double x = Math.random();
+            if (guiPlayer != null) {
+                if (x > 0.5)
+
+                    guiPlayer.setDiceStyle(4);
+                else
+                    guiPlayer.setDiceStyle(5);
             }
         }
+
 
 
         else {
