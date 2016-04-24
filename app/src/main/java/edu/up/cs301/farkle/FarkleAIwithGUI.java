@@ -69,17 +69,7 @@ public class FarkleAIwithGUI extends GameHumanPlayer {
 
     protected int[][] diceResID = {{R.drawable.red_one_die,R.drawable.red_two_die,
             R.drawable.red_three_die, R.drawable.red_four_die,
-            R.drawable.red_five_die,R.drawable.red_six_die},{ R.drawable.pink_one_die,R.drawable.pink_two_die,
-            R.drawable.pink_three_die, R.drawable.pink_four_die,
-            R.drawable.pink_five_die,R.drawable.pink_six_die},{ R.drawable.sunset_one_die,R.drawable.sunset_two_die,
-            R.drawable.sunset_three_die, R.drawable.sunset_four_die,
-            R.drawable.sunset_five_die,R.drawable.sunset_six_die},{R.drawable.purple_one_die,R.drawable.purple_two_die,
-            R.drawable.purple_three_die, R.drawable.purple_four_die,
-            R.drawable.purple_five_die,R.drawable.purple_six_die},{R.drawable.nux_one_die,R.drawable.nux_two_die,
-            R.drawable.nux_three_die, R.drawable.nux_four_die,
-            R.drawable.nux_five_die,R.drawable.nux_six_die},{R.drawable.veg_one_die,R.drawable.veg_two_die,
-            R.drawable.veg_three_die, R.drawable.veg_four_die,
-            R.drawable.veg_five_die,R.drawable.veg_six_die},{R.drawable.black_one_die,R.drawable.black_two_die,
+            R.drawable.red_five_die,R.drawable.red_six_die},{R.drawable.black_one_die,R.drawable.black_two_die,
             R.drawable.black_three_die, R.drawable.black_four_die,
             R.drawable.black_five_die,R.drawable.black_six_die}};
 
@@ -126,6 +116,7 @@ public class FarkleAIwithGUI extends GameHumanPlayer {
      */
     @Override
     public void receiveInfo(GameInfo info) {
+
         if (info instanceof FarkleState) {
             state = (FarkleState) info;
             updateDisplay();
@@ -199,13 +190,13 @@ public class FarkleAIwithGUI extends GameHumanPlayer {
                 myCurActionList.remove(0);
                 int sleepTime = 0;
                 if (curAction instanceof RollAction) {
-                    sleepTime = 400;
+                    sleepTime = 300;
                     diceChosen = false;
                     myCurActionList.clear();
                 }  else if (curAction instanceof SelectDieAction) {
                     sleepTime = 300;
                 } else if (curAction instanceof BankPointsAction) {
-                    sleepTime = 1000;
+                    sleepTime = 800;
                     diceChosen = false;
                 }
                 try {
@@ -234,9 +225,6 @@ public class FarkleAIwithGUI extends GameHumanPlayer {
         if ( activity instanceof FarkleMainActivity) {
             ((FarkleMainActivity)activity).setGuiPlayer(this);
         }
-
-        ActionBar actionBar = activity.getActionBar();
-        actionBar.show();
 
         // text views
         p0scoreText = (TextView)activity.findViewById(R.id.p0CurrentScore);
@@ -269,9 +257,7 @@ public class FarkleAIwithGUI extends GameHumanPlayer {
 
         farkleImage1.setVisibility(View.INVISIBLE);
         farkleImage2.setVisibility(View.INVISIBLE);
-
     }
-
 
 
     /**
